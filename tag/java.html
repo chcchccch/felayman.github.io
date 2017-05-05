@@ -9,7 +9,7 @@ title: felayman个人博客
     <div class="main">
         <ul class="cbp_tmtimeline">
             {% for post in site.posts %}
-            {% if post.categories[0] == 'scala' %}
+            {% if post.tag contains  'java' %}
             <li>
                 <time class="cbp_tmtime" datetime="{{'%Y-%m-%d %H:%M'}}">
                     <span>{{post.date | date: '%Y-%m-%d' }}</span>
