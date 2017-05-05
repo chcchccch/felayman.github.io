@@ -1,8 +1,8 @@
 <div class="banner">
   <div class="container">
   	{% if page.categories != null %}
-    	<a href="{{ '/categories/' | prepend: site.baseurl }}#{{page.categories}}-ref">{{page.categories}}</a>	/
-    	<a href="{{ '/tag/' | prepend: site.baseurl }}#{{page.tag}}-ref">{{page.tag}}</a>
+    	<a href="{{ '/categories/' | prepend: site.baseurl }}#{{page.categories}}">{{page.categories}}</a>	/
+    	<a href="{{ '/tag/' | prepend: site.baseurl }}#{{page.tag}}">{{page.tag}}</a>
     {% else %}
     	{{ site.banner }}
     {% endif %}

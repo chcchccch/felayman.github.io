@@ -14,15 +14,12 @@
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
+                {% for category in site.categories %}
                 <li>
-                    <a href="{{ '/' | prepend: site.baseurl }}">首页</a>
-                </li>
-                <li>
-                    <a href="{{ '/categories/' | prepend: site.baseurl }}">大类分解</a>
-                </li>
-                <li>
-                    <a href="{{ '/tag' | prepend: site.baseurl }}">小类内聚</a>
-                </li>
+                    <a href="{{ category[0] }}">
+                        {{ category[0] | join: "/" }} <span style="color: #480d1c;" ></span>
+                    </a></li>
+                {% endfor %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
