@@ -9,7 +9,7 @@ title: felayman个人博客
     <div class="main">
         <ul class="cbp_tmtimeline">
             {% for post in site.posts %}
-            {%if post.category == page.category_name%}
+            {% if post.categories[0] == 'elasticsearch' %}
             <li>
                 <time class="cbp_tmtime" datetime="{{'%Y-%m-%d %H:%M'}}">
                     <span>{{post.date | date: '%Y-%m-%d' }}</span>
@@ -23,7 +23,7 @@ title: felayman个人博客
                     </p>
                 </div>
             </li>
-            {%endif%}
+            {% endif %}
             {% endfor %}
         </ul>
     </div>
