@@ -3,26 +3,22 @@ layout: home
 title: felayman个人博客
 ---
 
-<div class="container docs-container">
-        <div class="col-md-12" role="main">
-            <div class="docs-content">
-                <div class="wrapper">
-                    <div class="home">
-                        <div class="main">
-                            <ul class="cbp_tmtimeline">
-                                {% for post in site.posts %}
-                                <time class="cbp_tmtime" datetime="2013-04-10 18:30">
-                                    <span>4/10/13</span> <span>18:30</span>
-                                </time>
-                                <div class="cbp_tmicon cbp_tmicon-phone"></div>
-                                <div class="cbp_tmlabel">
-                                    <h2>{{post.title}}</h2>
-                                </div>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
+<div class="container">
+    <header class="clearfix">
+    </header>
+    <div class="main">
+        <ul class="cbp_tmtimeline">
+            {% for post in site.posts %}
+            <li>
+                <time class="cbp_tmtime" datetime="2013-04-10 18:30">
+                    <span>4/10/13</span> <span>18:30</span>
+                </time>
+                <div class="cbp_tmicon cbp_tmicon-phone"></div>
+                <div class="cbp_tmlabel">
+                    <h2>{{post.title}}</h2>
                 </div>
-            </div>
-        </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
