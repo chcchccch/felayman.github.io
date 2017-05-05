@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title:  如何使用LessOrMore这个Jekyll模版
 date:   2016-08-27 01:08:00 +0800
 categories: dubbo

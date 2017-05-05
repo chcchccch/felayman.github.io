@@ -1,16 +1,16 @@
 <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
     <div class="container">
-        <!--<div class="navbar-header">-->
-            <!--<a href="/" class="navbar-brand">-->
-                <!--<img src="{{ '/styles/img/favicon.png' | prepend: site.baseurl }}">-->
-            <!--</a>-->
-        <!--</div>-->
+        <div class="navbar-header">
+            <a href="/home/index.html" class="navbar-brand">
+                <img src="{{ '/styles/img/favicon.png' | prepend: site.baseurl }}">
+            </a>
+        </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
                 {% for category in site.categories %}
                 <li>
-                    <a href="{{ category[0] }}">
-                        {{ category[0] | join: "/" }} <span style="color: #480d1c;" ></span>
+                    <a href="{{ category[0] | prepend: '/categories/' }}">
+                        {{ category[0] }} <span style="color: #480d1c;" ></span>
                     </a></li>
                 {% endfor %}
             </ul>
