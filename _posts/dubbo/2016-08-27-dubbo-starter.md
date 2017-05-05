@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 title:  如何使用LessOrMore这个Jekyll模版
 date:   2016-08-27 01:08:00 +0800
 categories: dubbo
@@ -114,11 +114,3 @@ jekyll server
 
 当然你也可以为了我的工作打赏！以激励我做出更好的东西。
 
-支付宝
-----------------
-
-<img src="{{ '/styles/images/zhifubao.PNG' | prepend: site.baseurl }}" alt="支付宝二维码付款给Freud" width="310" />
-
-微信
-----------------
-![微信二维码付款给Freud]({{ '/styles/images/weixin.png' | prepend: site.baseurl }})
