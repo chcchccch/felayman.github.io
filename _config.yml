@@ -8,9 +8,10 @@ url: "http://www.felayman.com"
 baseurl: ""
 github_username:  felayman
 markdown: kramdown
-gems:
-  - jekyll-feed
+gems: [jekyll-feed,jekyll-paginate]
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
 highlighter: Pygments
 permalink: /:categories/:year/:month/:day/:title/
-paginate: 10
+paginate: 5
+paginate_path: "home/page:num"
+

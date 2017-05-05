@@ -7122,3 +7122,14 @@ td.visible-print {
     padding-top: 70px;
     margin-top: -70px;
 }
+.pagination{
+  color: #1d365d;
+}
+
+.pagination a {
+  color: #3594cb;
+}
+
+.pagination a:hover{
+  color: #1d365d;
+}
