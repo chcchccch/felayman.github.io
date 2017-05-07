@@ -10,20 +10,17 @@
                 {% for category in site.categories %}
                 <li>
                     <a href="{{ category[0] | prepend: '/categories/' }}">
-                        {{ category[0] }} <span style="color: #480d1c;" ></span>
+                        {{ category[0]  | lstrip }}
                     </a></li>
                 {% endfor %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="https://github.com/felayman" target="_blank"><strong>Github</strong></a>
-                </li>
-                <li ">
+                <li >
                     <a href="/gallery/" class="dropdown-toggle" data-toggle="dropdown" target="_blank">相册<b class="active"></b></a>
                 </li>
-                <li >
-                    <a href="/about.html" class="dropdown-toggle" data-toggle="dropdown">关于<b class="active"></b></a>
-                </li>
+                <!--<li >-->
+                    <!--<a href="/about.html" class="dropdown-toggle" data-toggle="dropdown">关于<b class="active"></b></a>-->
+                <!--</li>-->
             </ul>
         </nav>
     </div>

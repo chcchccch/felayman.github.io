@@ -6355,11 +6355,7 @@ hr {
 .footer {
   padding-top: 40px;
   padding-bottom: 30px;
-  margin-top: 100px;
-  color: #777;
-  background: #fff;
   text-align: center;
-  border-top: 1px solid #eeeeee;
 }
 .footer-links {
   margin: 10px 0;
@@ -6374,7 +6370,7 @@ hr {
 }
 @media (min-width: 768px) {
   .footer {
-    text-align: left;
+    text-align: center;
   }
   .footer p {
     margin-bottom: 0;
@@ -6530,7 +6526,9 @@ hr {
 }
 .docs-nav .navbar-nav > li > a,
 .docs-nav .navbar-nav > li > span {
-  color: #b9c8e0;
+  color: #ffffff;
+ font-family: "Cambria Math";
+  font-size:18px;
 }
 .docs-nav .navbar-nav > li > a:hover,
 .docs-nav .navbar-nav > li > span:hover {
