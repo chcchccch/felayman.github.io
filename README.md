@@ -26,7 +26,7 @@ git clone git@github.com:felayman/felayman.github.io.git
 1. 在自己的github上新建一个项目,比如 blog
 2. 在项目blog的settings中选择Github Pages页面,点击Choose a theme 完成一个 主题选择,此时项目中只有_confug.yml和index.md文件
 3. clone你刚才新建的blog项目到本地
-4. git clone git@github.com:felayman/felayman.github.io.git ,克隆我的项目到本地,然后clone后的项目文件替换你自己的blog项目文件,然后push我的项目文件到你的github上去
+4. git clone git@github.com:felayman/felayman.github.io.git ,克隆我的项目到本地,然后用clone后的项目文件替换你自己的blog项目文件,然后push我的项目文件到你的github上去
 5. 打开浏览器输入：https://your_github_name.github.io/blog 查看运行结果
 
 ### 目录说明
@@ -36,18 +36,36 @@ git clone git@github.com:felayman/felayman.github.io.git
 - about 存放about/index.html(官方推荐方式),一般用来存放个人简介页面,也可以在项目根目录下建立about.html
 - assert  存放发布的文章所需要引用的图片等静态资源文件
 - categories 存放不同category文章,一般是列出不同分类文章的列表页面,该页面暂不支持分页
- - home 存放博客首页面index.html
+ - home 存放博客首页面index.html,等效于https://www.felayman.com/home/index.html, 该页面支持分页(所有文章列表,时间排序)
  - style 存放样式、图片、脚本、字体等文件
  - tag 存放不同tag的文件(jekyll支持安照category,tag两种方式分类的方式来展示文章列表)
  - CNANE 自己的域名指向github page
  - _config.yml 整个项目的全局变量配置文件
- - index.html 网站入口文件
+ - index.html 网站入口文件,如输入https://www.felayman.com, 则等效于https://www.felayman.com/index.html
 
-
-### 如何安装 ,参考 : [Less Or More](https://github.com/luoyan35714/LessOrMore)
 
  ### 参考主题
  - Less Or More [Less Or More](https://github.com/luoyan35714/LessOrMore)
  - front-cover  [front-cover](https://github.com/dashingcode/front-cover)
+
+
+ ### 该主题涉及到的skills
+ - markdown语法 [markdown语法](http://daringfireball.net/projects/markdown/syntax)
+ - jekyll模板引擎  [jekyll](http://jekyll.com.cn/)
+ - liquid模板语言 [liquid](https://shopify.github.io/liquid/)
+
+ ### 打赏
+
+ 如果你还在各种云机器上自己部署自己的博客,用着传统的方式来运维自己的博客,不妨试试这种简洁的方式,只需要一个域名+GitHub Pages 就搞定
+ 如果你使用了该博客后觉得可以让你喜欢上这种简洁的博客,或者在部署过程中遇到问题,或者想定制其他功能,欢迎随时联系,扫描下方二维码即可添加我好友
+
+ #### 我的微信
+ ![二维码](https://github.com/felayman/felayman.github.io/blob/master/assert/felayman.png)
+
+ #### 微信打赏
+ ![打赏](https://github.com/felayman/felayman.github.io/blob/master/assert/wechat_pay.png)
+
+
+
 
 
