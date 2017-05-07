@@ -1,6 +1,6 @@
 [https://www.felayman.com](https://www.felayman.com)
 
-![博客封面]({{ '/assert/index.png' | prepend: site.baseurl  }})
+![博客封面](https://github.com/felayman/felayman.github.io/blob/master/assert/index.png)
 
 ## 博客模板说明
 
