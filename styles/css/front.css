@@ -133,3 +133,9 @@ a:hover {
     text-align: center;
     width: 156px;
 }
+.home a:hover{
+    color: #3594cb;
+}
+.cover-ul a:hover{
+    color: #3594cb;
+}
