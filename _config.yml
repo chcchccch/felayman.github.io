@@ -7,6 +7,9 @@ meta_description: felayman;个人博客;学而不思则罔;思而不学则殆;�
 url: "http://www.felayman.com"
 baseurl: ""
 github_username:  felayman
+gitbook_username: felayman
+weibo_username: felayman
+github_url: "https://github.com/felayman"
 markdown: kramdown
 gems: [jekyll-feed,jekyll-paginate]
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
