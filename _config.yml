@@ -9,6 +9,7 @@ baseurl: ""
 github_username:  felayman
 gitbook_username: felayman
 weibo_username: felayman
+home_url: felayman
 github_url: "https://github.com/felayman"
 markdown: kramdown
 gems: [jekyll-feed,jekyll-paginate]

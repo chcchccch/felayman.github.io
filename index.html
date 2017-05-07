@@ -20,11 +20,15 @@ title: felayman个人博客
 		{% endif %}
 
 		{% if site.weibo_username %}
-		<li><a class="fa fa-2x fa-weibo" href="https://weibo.com/{{ site.weibo_username }}"><span class="description">微博</span></a></li>
+		<li><a class="fa fa-2x fa-weibo" href="https://weibo.com/{{ site.weibo_username }}" target="_blank"><span class="description">微博</span></a></li>
+		{% endif %}
+
+		{% if site.home_url %}
+		<li><a class="fa fa-2x fa-500px" href="https://www.500px.me/{{ site.home_url }} " target="_blank"><span class="description">500px</span></a></li>
 		{% endif %}
 
 		{% if site.email %}
-		<li><a class="fa fa-2x fa-envelope" href="mailto:{{ site.email }}" target="_blank"><span class="description">Email</span></a></li>
+		<li><a class="fa fa-2x fa-envelope" href="mailto:{{ site.email }} " target="_blank"><span class="description">Email</span></a></li>
 		{% endif %}
 	</ul>
 
