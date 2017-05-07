@@ -60,10 +60,10 @@ git clone git@github.com:felayman/felayman.github.io.git
  如果你使用了该博客后觉得可以让你喜欢上这种简洁的博客,或者在部署过程中遇到问题,或者想定制其他功能,欢迎随时联系,扫描下方二维码即可添加我好友
 
  #### 我的微信
- ![二维码](https://github.com/felayman/felayman.github.io/blob/master/assert/felayman.png =200 * 200)
+ <img src="https://github.com/felayman/felayman.github.io/blob/master/assert/felayman.png" height=200 width=200/>
 
  #### 微信打赏
- ![打赏](https://github.com/felayman/felayman.github.io/blob/master/assert/wechat_pay.png = 200 * 200)
+ <img src="https://github.com/felayman/felayman.github.io/blob/master/assert/wechat_pay.png" height=200 width=200/>
 
 
 
