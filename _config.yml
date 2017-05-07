@@ -1,14 +1,15 @@
 title: www.felayman.com
 email: felayman@gmail.com
 author: felayman
-description: felayman;个人博客
-motto: Actually, less is more!
-meta_description: felayman个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休
+description: felayman个人博客
+motto: felayman个人博客
+meta_description: felayman个人博客
 url: "http://www.felayman.com"
 baseurl: ""
 github_username:  felayman
 gitbook_username: felayman
 weibo_username: felayman
+weixin_username: felayman
 home_url: felayman
 github_url: "https://github.com/felayman"
 markdown: kramdown
