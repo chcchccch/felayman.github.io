@@ -90,6 +90,7 @@ li {
     text-align: center;
     height: auto;
     width: auto;
+    float: left;
 }
 li:hover {
     background-color: none;
@@ -112,26 +113,26 @@ a:hover {
     color: white;
     text-decoration: none;
 }
-.description {
-    display: inline-block;
-    color: white;
-    font-family: Arial;
-    margin-left: 40px;
-}
+/*.description {*/
+    /*display: inline-block;*/
+    /*color: white;*/
+    /*font-family: Arial;*/
+    /*margin-left: 40px;*/
+/*}*/
 .content {
     padding-top: 60px;
 }
 }
 .home{
     border: 2px solid #fff;
-    color: #fff;
-    display: block;
+    display: inline-table;
     font-size: 18px;
     height: 38px;
     line-height: 38px;
     margin: 26px auto 0;
     text-align: center;
     width: 156px;
+    padding:0;
 }
 .home a:hover{
     color: #3594cb;
