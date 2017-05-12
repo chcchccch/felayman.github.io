@@ -3,15 +3,20 @@
 {% include post/head.html %}
 {% include home/header.html %}
 <body class="index">
-    <div class="container">
-        <div class="row">
+<div class="container">
+
+    <div class="row">
             <div class="col-md-12" role="main">
+
                 <div class="panel docs-content">
+
                     <div class="wrapper">
                         <header class="post-header">
                             <h2 class="post-title text-center" >{{page.title}}</h2>
                             <hr>
-                            <div class="meta">
+                            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                             <div class="meta">
                                 <p>发表时间 :{{page.date | date: '%Y-%m-%d %H:%M'}}</p>
                                 <p>作者: {{site.author}}</p>
                                 <p>分类: <a href="/categories/{{page.categories}}">{{page.categories}}</a></p>
@@ -32,6 +37,10 @@
             </div>
         </div>
     </div>
-    {% include home/footer.html %}
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2133433"></script>
+<!-- UY END -->
+   {% include home/footer.html %}
 </body>
 </html>

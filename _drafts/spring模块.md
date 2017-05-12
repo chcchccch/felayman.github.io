@@ -1,0 +1,69 @@
+# spring 模块列表
+- spring-aop   Spring's proxy-based AOP framework.
+- spring-aspects Spring's AspectJ-based aspects.
+- spring-beans Spring's core beans and bean factory support.
+- spring-context Spring's central application context runtime. Also includes scheduling and remoting abstractions.
+- spring-context-support Support classes for integrating common third-party libraries into a Spring application context.
+- spring-core Spring's core utilities, used by many other Spring modules.
+- spring-expression Core abstractions behind the  Spring Expression Language
+- spring-instrument Spring's instrumentation agent for JVM bootstrapping.
+- spring-jdbc Spring's JDBC support package. Includes DataSource setup support as well as JDBC access support.
+- spring-jms Spring's JMS support package, covering synchronous JMS access as well as message listener containers.
+- spring-messaging Spring Framework's support for messaging architectures and protocols.
+- spring-orm Spring's O/R Mapping package: supporting JPA as well as native Hibernate.
+- spring-oxm
+- spring-test Spring's TestContext framework. Also includes common Servlet and Portlet API mocks.
+- spring-tx Spring's transaction infrastructure. Also includes DAO support and JCA integration.
+- spring-web Spring's core web support packages, for any kind of web environment.
+- spring-web-fulx
+- spring-webmvc Spring's MVC framework in its Servlet API version. Includes support for common view technologies.
+-spring-websocket
+
+## spring-core(非包范围只列举核心接口)
+- asm  spring  对asm的重新打包,为了防止一些潜在的依赖冲突 //TODO 目前是根据spring文档中记载,需要验证
+- cglib spring对cglib的重新打包,为了防止一些潜在的依赖冲突,其实仅仅是封装了一个扩展 //TODO 目前是根据spring文档中记载,需要验证
+- lang 几个注解,标识使用jdk的版本以及Sun公司的一些服务,如Misc(废弃),SunHttpServer
+- objeneis 一个轻量级的java库,可以绕过构造器创建一个实例,spring对此做了封装
+- util spring封装的一些全局使用的工具类
+- core
+     - annation  一些核心注解以及对应注解的工具,如AliasFor
+     - codec  编码解码的加强工具
+     - convert
+        - converter  作为一个SPI机制提供自定义的转换器
+        - support  封装了spirng提供的许许多多的内置转换器
+     - env 由spring的bean定义描述以及带层级属性源组成的的spring环境
+     - io 通用的基于文件的抽象Resource,整个框架都会使用到
+     - serializer Spring提供的序列化接口和默认实现
+     - style spring提供的一些对字符串样式的处理
+     - task  定义spirng核心TaskExecutor框架,并且提供了同步和简单异步执行器框架
+     - type 支持类型反射的核心包
+ - AliasRegistry Common interface for managing aliases
+ - AttributeAccessor Interface defining a generic contract for attaching and accessing metadata * to/from arbitrary objects
+ - DecoratingProxy 4.3版本才提供的一个对spring proxy 提供装饰的一个接口
+ - InfrastructureProxy 透明代理
+ - Ordered 排序接口
+ - ParameterNameDiscoverer  发现方法参数的名称或者构造器参数的名称
+ - ResolvableTypeProvider 获取某个实例的ResolvableType的提供器
+ - SmartClassLoader  Interface to be implemented by a reloading-aware ClassLoader
+
+## spring-beans(非包范围只列举核心接口)
+- annation 提供一个核心的工具类来实现将某个注解的方法复制为某个bean的属性
+- factory
+  - annation Support package for annotation-driven bean configuration.
+  - config  SPI interfaces and configuration-related convenience classes for bean factories
+  - parsing Support infrastructure for bean definition parsing
+  - serviceloader Support package for the Java 6 ServiceLoader facility
+  - support 容器以及容器实例的一些支持
+  - wiring Mechanism to determine bean wiring metadata from a bean instance.Foundation for aspect-driven bean configuration.
+  - xml Contains an abstract XML-based {@code BeanFactory} implementation,including a standard "spring-beans" XSD.
+- propertyeditors Properties editors used to convert from String values to object types such as java.util.Properties.
+- support Classes supporting the org.springframework.beans package,such as utility classes for sorting and holding lists of beans.
+- BeanInfoFactory  对某个bean进行包装,包含一些描述的meta信息
+- BeanMetadataElement  获取某个bean的配置信息
+- BeanWrapper 对spring-bean的核心包装,比如PropertyEditorRegistrySupport中的一些配置
+- PropertyAccessor 属性访问器,对springbean的属性的赋值取值
+- Mergeable 可以与父类的属性进行合并的一个接口
+- PropertyEditorRegistrar 注册PropertyEditorRegistry
+- PropertyEditorRegistry 注册PropertyEditor
+- PropertyValues 包含多个PropertyValue
+- TypeConverter 类型转换器
