@@ -15,12 +15,11 @@ title: felayman个人博客
                     <span class=""></span>
                 </time>
                 {% if post.tag contains  '原创' %}
-                <div class="cbp_tmicon cbp_tmicon-phone "></div>
-                {%endif%}
+                    <div class="cbp_tmicon cbp_tmicon-phone "></div>
                 {% elsif post.tag contains  '翻译' %}
-                <div class="cbp_tmicon cbp_tmicon-phone-1 "></div>
-                {% else %}
-                <div class="cbp_tmicon cbp_tmicon-phone "></div>
+                    <div class="cbp_tmicon cbp_tmicon-phone-1 "></div>
+                {%else%}
+                    <div class="cbp_tmicon cbp_tmicon-phone "></div>
                 {%endif%}
                 <div class="cbp_tmlabel ">
                     <h2><a class="anchor-target-small"  href="{{post.url}}">{{post.title}}</a></h2>
