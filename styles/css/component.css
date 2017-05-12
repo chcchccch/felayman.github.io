@@ -42,13 +42,13 @@
 }
 
 .cbp_tmtimeline > li .cbp_tmtime span:first-child {
-	font-size: 0.9em;
-	color: #bdd0db;
+	font-size: 1.2em;
+	color: #8c9faa;
 }
 
 .cbp_tmtimeline > li .cbp_tmtime span:last-child {
 	font-size: 2.9em;
-	color: #3594cb;
+	color: #6cbfee;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmtime span:last-child {
@@ -58,7 +58,7 @@
 /* Right content */
 .cbp_tmtimeline > li .cbp_tmlabel {
 	margin: 0 0 15px 25%;
-	background: #3594cb;
+	background: #6cbfee;
 	color: #fff;
 	padding: 1em;
 	font-size: 14px;
@@ -75,7 +75,6 @@
 .cbp_tmtimeline > li .cbp_tmlabel h2 { 
 	margin-top: 0px;
 	padding: 0 0 0 -10px;
-	border-bottom: 1px solid rgba(255,255,255,0.4);
 }
 
 /* The triangle */
@@ -87,7 +86,7 @@
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-right-color: #3594cb;
+	border-right-color: #6cbfee;
 	border-width: 10px;
 	top: 10px;
 }
