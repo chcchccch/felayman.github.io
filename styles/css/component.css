@@ -44,6 +44,7 @@
 .cbp_tmtimeline > li .cbp_tmtime span:first-child {
 	font-size: 1.2em;
 	color: #8c9faa;
+	line-height: 2;
 }
 
 .cbp_tmtimeline > li .cbp_tmtime span:last-child {
@@ -115,12 +116,11 @@
 	box-shadow: 0 0 0 8px #afdcf8;
 	text-align: center;
 	left: 20%;
-	top: 0;
 	margin: 0 0 0 -25px;
 }
 
 .cbp_tmicon-phone:before {
-	content: "\e000";
+	content: "原";
 }
 
 .cbp_tmicon-screen:before {

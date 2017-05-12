@@ -10,12 +10,12 @@ title: felayman个人博客
         <ul class="cbp_tmtimeline">
             {% for post in paginator.posts %}
             <li>
-                <time class="cbp_tmtime" datetime="{{'%Y-%m-%d %H:%M'}}">
+                <time class="cbp_tmtime " datetime="{{'%Y-%m-%d %H:%M'}}">
                     <span>{{post.date | date: '%Y-%m-%d %H:%M' }} </span>
-                    <span></span>
+                    <span class=""></span>
                 </time>
-                <div class="cbp_tmicon cbp_tmicon-phone"></div>
-                <div class="cbp_tmlabel">
+                <div class="cbp_tmicon cbp_tmicon-phone "></div>
+                <div class="cbp_tmlabel ">
                     <h2><a class="anchor-target-small"  href="{{post.url}}">{{post.title}}</a></h2>
                 </div>
             </li>
@@ -24,13 +24,13 @@ title: felayman个人博客
     </div>
     <div class="pagination   text-center center-block">
         {% if paginator.previous_page ==1  %}
-            <a href="/home/" class="previous">上一页</a>
+            <a href="/home/" class="previous fa fa-caret-left">上一页</a>
         {% elsif paginator.previous_page  %}
-            <a href="/home/page{{ paginator.previous_page }}" class="previous">上一页</a>
+            <a href="/home/page{{ paginator.previous_page }}" class="previous fa fa-caret-left"> &nbsp;上一页</a>
         {% endif %}
-            <span class="page_number ">当前页: {{ paginator.page }}  / {{ paginator.total_pages }}</span>
+            <span class="page_number ">&nbsp;&nbsp;当前页: {{ paginator.page }}  / {{ paginator.total_pages }}&nbsp;&nbsp;</span>
         {% if paginator.next_page %}
-            <a href="/home/page{{ paginator.next_page }}" class="next">下一页</a>
+            <a href="/home/page{{ paginator.next_page }}" class="next fa fa-caret-right">下一页</a>
         {% endif %}
     </div>
 </div>
