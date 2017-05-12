@@ -17,6 +17,6 @@ gems: [jekyll-feed,jekyll-paginate]
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
 highlighter: Pygments
 permalink: /:categories/:year/:month/:day/:title/
-paginate: 5
+paginate: 10
 paginate_path: "home/page:num"
 
