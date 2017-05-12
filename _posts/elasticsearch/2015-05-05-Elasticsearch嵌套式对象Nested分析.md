@@ -3,7 +3,7 @@ layout: post
 title:  "Elasticsearch嵌套式对象Nested分析"
 date:   2017-05-05 23:44:01 +0800
 categories: elasticsearch
-tag: elasticsearch
+tag: elasticsearch 翻译
 ---
 
 

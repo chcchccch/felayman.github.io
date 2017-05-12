@@ -123,6 +123,10 @@
 	content: "原";
 }
 
+.cbp_tmicon-phone-1:before {
+	content: "译";
+}
+
 .cbp_tmicon-screen:before {
 	content: "\e001";
 }
