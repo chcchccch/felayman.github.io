@@ -15,7 +15,13 @@ title: felayman个人博客
                     <span>{{post.date | date: '%Y-%m-%d %H:%M' }} </span>
                     <span></span>
                 </time>
-                <div class="cbp_tmicon cbp_tmicon-phone"></div>
+                {% if post.tag contains  '原创' %}
+                <div class="cbp_tmicon cbp_tmicon-phone "></div>
+                {% elsif post.tag contains  '翻译' %}
+                <div class="cbp_tmicon cbp_tmicon-phone-1 "></div>
+                {%else%}
+                <div class="cbp_tmicon cbp_tmicon-phone "></div>
+                {%endif%}
                 <div class="cbp_tmlabel">
                     <h4><a href="{{post.url}}">{{post.title}}</a></h4>
                 </div>
