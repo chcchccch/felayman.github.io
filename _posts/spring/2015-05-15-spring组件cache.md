@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "spring组件cache!"
 date:   2015-05-15 11:03:01 +0800
-categories: spring 原创
-tag: spring
+categories: spring
+tag: spring 原创
 
 ---
 
