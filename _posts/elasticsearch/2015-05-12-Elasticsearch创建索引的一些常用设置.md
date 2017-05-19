@@ -4,6 +4,7 @@ title:  "Elasticsearch创建索引的一些常用设置"
 date:   2017-05-12 23:51:01 +0800
 categories: elasticsearch
 tag: elasticsearch 翻译
+sid: 1495172680
 ---
 
 常见的设置如下：

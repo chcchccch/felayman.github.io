@@ -4,6 +4,7 @@ title:  "Elasticsearch插件head的安装(有坑)"
 date:  2017-05-05 23:43:01 +0800
 categories: elasticsearch
 tag: elasticsearch
+sid: 1495172620
 ---
 
 Elasticsearch出了5.2.1版本之后,就去试试它的新版本的使用，为了以后的升级进行测试。

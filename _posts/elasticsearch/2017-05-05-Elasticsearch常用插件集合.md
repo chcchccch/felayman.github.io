@@ -4,6 +4,7 @@ title:  "Elasticsearch常用插件集合"
 date:   2017-05-05 23:43:01 +0800
 categories: elasticsearch
 tag: elasticsearch
+sid: 1495172180
 ---
 
 目前项目中使用的是elasticsearch-1.5.1版本，使用到的插件如下：

@@ -4,6 +4,7 @@ title:  "Elasticsearch5.0新的API规范"
 date:   2017-05-12 23:51:01 +0800
 categories: elasticsearch
 tag: elasticsearch 翻译
+sid: 1495172681
 ---
 
 Elasticsearch的REST API 是基于JSON格式通过HTTP协议进行暴露的。

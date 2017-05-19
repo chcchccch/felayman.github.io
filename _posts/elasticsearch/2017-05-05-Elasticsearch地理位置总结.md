@@ -4,6 +4,7 @@ title:  "Elasticsearch地理位置总结"
 date:   2017-05-05 23:43:01 +0800
 categories: elasticsearch
 tag: elasticsearch
+sid: 1495122680
 ---
 
 翻译版本：https://es.xiaoleilu.com/310_Geopoints/00_Intro.html
