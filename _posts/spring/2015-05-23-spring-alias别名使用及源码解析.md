@@ -2,7 +2,7 @@
 layout: post
 title:  "spring-alias别名使用及源码解析"
 date:   2017-05-23 23:03:01 +0800
-categories: spring java
+categories: spring
 tag: spring java 原创
 sid: 1495553913
 ---
@@ -48,7 +48,88 @@ public String canonicalName(String name) {
 		return canonicalName;
 	}
 ~~~
-其中注释说的很清楚,Handle aliasing。其中存储别名只是用了一个ConcurrentHashMap,key是别名,value是bean的真正name。
+其中注释说的很清楚,Handle aliasing。其中存储别名只是用了一个ConcurrentHashMap,key是别名,value是bean的真正name(见下文别名的注册)。
 ~~~java
 private final Map<String, String> aliasMap = new ConcurrentHashMap<String, String>(16);
 ~~~
+
+##  spring-alias别名注册源码
+
+在spring的DefaultBeanDefinitionDocumentReader类中的parseDefaultElement方法中,在解析xml文件的时候会解析并注册别名到指定的bean上去,源码如下:
+~~~java
+private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
+		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
+			importBeanDefinitionResource(ele);
+		}
+		else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
+			processAliasRegistration(ele);
+		}
+		else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
+			processBeanDefinition(ele, delegate);
+		}
+		else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
+			// recurse
+			doRegisterBeanDefinitions(ele);
+		}
+	}
+~~~
+其中判断了节点类型,如果是ALIAS_ELEMENT(public static final String ALIAS_ELEMENT = "alias"),则对该节点进行解析调用processAliasRegistration(ele);。
+processAliasRegistration方法的源码如下:
+~~~java
+protected void processAliasRegistration(Element ele) {
+		String name = ele.getAttribute(NAME_ATTRIBUTE);
+		String alias = ele.getAttribute(ALIAS_ATTRIBUTE);
+		boolean valid = true;
+		if (!StringUtils.hasText(name)) {
+			getReaderContext().error("Name must not be empty", ele);
+			valid = false;
+		}
+		if (!StringUtils.hasText(alias)) {
+			getReaderContext().error("Alias must not be empty", ele);
+			valid = false;
+		}
+		if (valid) {
+			try {
+				getReaderContext().getRegistry().registerAlias(name, alias);
+			}
+			catch (Exception ex) {
+				getReaderContext().error("Failed to register alias '" + alias +
+						"' for bean with name '" + name + "'", ele, ex);
+			}
+			getReaderContext().fireAliasRegistered(name, alias, extractSource(ele));
+		}
+	}
+~~~
+核心代码为getReaderContext().getRegistry().registerAlias(name, alias);最终调用代码为SimpleAliasRegistry中的registerAlias(String name, String alias)方法,源码如下：
+~~~java
+public void registerAlias(String name, String alias) {
+		Assert.hasText(name, "'name' must not be empty");
+		Assert.hasText(alias, "'alias' must not be empty");
+		if (alias.equals(name)) {
+			this.aliasMap.remove(alias);
+		}
+		else {
+			String registeredName = this.aliasMap.get(alias);
+			if (registeredName != null) {
+				if (registeredName.equals(name)) {
+					// An existing alias - no need to re-register
+					return;
+				}
+				if (!allowAliasOverriding()) {
+					throw new IllegalStateException("Cannot register alias '" + alias + "' for name '" +
+							name + "': It is already registered for name '" + registeredName + "'.");
+				}
+			}
+			checkForAliasCircle(name, alias);
+			this.aliasMap.put(alias, name);
+		}
+	}
+~~~
+核心代码为
+~~~java
+checkForAliasCircle(name, alias);
+this.aliasMap.put(alias, name);
+~~~
+最终会将别名存储在aliasMap中,其中存储别名只是用了一个ConcurrentHashMap,key是别名,value是bean的真正name(见上文别名的解析)。
+
+其中,spring在其核心容器BeanFactory(其子类),大量的使用了ConcurrentHashMap来存储或缓存一些bean。
