@@ -133,3 +133,5 @@ this.aliasMap.put(alias, name);
 最终会将别名存储在aliasMap中,其中存储别名只是用了一个ConcurrentHashMap,key是别名,value是bean的真正name(见上文别名的解析)。
 
 其中,spring在其核心容器BeanFactory(其子类),大量的使用了ConcurrentHashMap来存储或缓存一些bean。
+
+spring对别名的处理为AliasRegistry及其子类,其中spring默认使用SampleAliasRegistry来完成对别名的操作,SampleAliasRegistry内部使用map来存储别名
