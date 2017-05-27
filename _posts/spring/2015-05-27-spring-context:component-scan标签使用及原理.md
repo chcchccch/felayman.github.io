@@ -1,13 +1,29 @@
 ---
 layout: post
-title:  "spring-<context:component-scan>标签使用及原理"
+title:  "context:component-scan标签 源码分"
 date:   2017-05-25 11:03:01 +0800
 categories: spring
 tag: spring 原创
 sid: 1495854290
 ---
 
-# context:component-scan标签 源码分析
+## context:component-scan的使用
+
+~~~java
+<context:component-scan base-package="com.vcg.community"
+                            annotation-config="false"
+                            name-generator="com.vcg.community.spring.core.config.SimpleAnnotationBeanNameGenerator"
+                            resource-pattern="**/*.class"
+                            scope-resolver="org.springframework.context.annotation.AnnotationScopeMetadataResolver"
+                            use-default-filters="true"
+>
+<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+~~~
+
+
+
+## context:component-scan源码分析
 
 -   xsd文件定义
 
@@ -268,7 +284,7 @@ public BeanDefinition parse(Element element, ParserContext parserContext) {
 
 整个解析流程如下：
 
-1. 首先会读取context:component-scan的属性节点,所有节点或子节点列表如下:
+1. 首先会读取context:component-scan的属性节点,所有节点属性或子节点列表如下:
     ~~~java
     private static final String BASE_PACKAGE_ATTRIBUTE = "base-package";
     private static final String RESOURCE_PATTERN_ATTRIBUTE = "resource-pattern";
@@ -388,3 +404,65 @@ public BeanDefinition parse(Element element, ParserContext parserContext) {
     - 为生成的注解类注册别名
     - 完成注册,实际上就是将注解类缓存到DefaultListableBeanFactory对应的实例map结构中去
 
+##   context:component-scan对属性元素的处理
+
+context:component-scan元素共有四个属性节点:
+- base-package               <xsd:attribute name="base-package" type="xsd:string" use="required">
+- use-default-filters       <xsd:attribute name="use-default-filters" type="xsd:boolean"default="true">
+- resource-pattern         <xsd:attribute name="resource-pattern" type="xsd:string">
+- annotation-config       <xsd:attribute name="annotation-config" type="xsd:boolean"default="true">
+- name-generator          <xsd:attribute name="name-generator" type="xsd:string">
+
+### base-package
+
+base-package的作用:The comma/semicolon/space/tab/linefeed-separated list of packages to scan for annotated components.
+
+> 配置需要扫描的包名,值为以逗号,分号,空格,制表符,换行符为分隔符
+
+如以逗号为分隔符,base-package="com.vcg.community.dao;com.vcg.community.service;com.vcg.community.action"
+
+### use-default-filters
+
+use-default-filters的作用:Indicates whether automatic detection of classes annotated with @Component, @Repository, @Service,or @Controller should be enabled. Default is "true".
+
+>默认为true表示过滤@Component、@ManagedBean、@Named注解的类,如果改为false默认将不过滤这些默认的注解来定义Bean,即这些注解类不能被过滤到,即不能通过这些注解进行Bean定义;
+
+### resource-pattern
+
+resource-pattern的作用:Controls the class files eligible for component detection. Defaults to "**/*.class", the recommended value.Consider use of the include-filter and exclude-filter elements for a more fine-grained approach.
+
+>表示扫描注解类的后缀匹配模式,即"base-package+resource-pattern"将组成匹配模式用于匹配类路径中的组件,默认后缀为“**/*.class”,即指定包下的所有以.class结尾的类文件
+
+NOTE:use-dafault-filters=”false”的情况下:<context:exclude-filter>指定的不扫描,<context:include-filter>指定的扫描
+
+### annotation-config
+
+annotation-config的作用:Indicates whether automatic detection of classes annotated with @Component, @Repository, @Service,or @Controller should be enabled. Default is "true".
+
+> 表示是否自动支持注解实现Bean依赖注入,默认支持，如果设置为false,将关闭支持注解的依赖注入,需要通过<context:annotation-config/>开启
+
+### name-generator
+
+name-generator的作用:The fully-qualified class name of the BeanNameGenerator to be used for naming detected components.
+
+> 默认情况下的Bean标识符生成策略,默认是 AnnotationBeanNameGenerator,其将生成以小写开头的类名(不包括包名);可以自定义自己的标识符生成策略
+
+
+##   context:component-scan对字元素的处理
+
+ context:component-scan共有两个子节点元素
+ - include-filter               <xsd:element name="include-filter" type="filterType"minOccurs="0" maxOccurs="unbounded">
+ - exclude-filter              <xsd:element name="exclude-filter" type="filterType"minOccurs="0" maxOccurs="unbounded">
+
+### include-filter
+
+include-filter的作用:表示过滤到的类将被注册为Spring管理Bean
+
+
+### exclude-filter
+
+exclude-filter的作用:表示过滤到的类将不被注册为Spring管理Bean，它比<context:include-filter>具有更高优先级
+
+## 参考文章:
+
+- spring 注解模式详解 http://www.tuicool.com/articles/Z7R7jy
