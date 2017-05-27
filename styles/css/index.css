@@ -7137,7 +7137,7 @@ td.visible-print {
   text-decoration: none;
 }
 .cy{
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .cyReward{
   text-align:center;
@@ -7145,4 +7145,5 @@ td.visible-print {
 .comment{
   padding: 0 30px 10px;
   text-align:center;
+  margin: 0 auto;
 }
