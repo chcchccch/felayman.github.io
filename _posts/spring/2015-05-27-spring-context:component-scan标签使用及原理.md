@@ -21,7 +21,23 @@ sid: 1495854290
 <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 ~~~
 
+- base-package： 表示扫描注解类的开始位置，即将在指定的包中扫描，其他包中的注解类将不被扫描，默认将扫描所有类路径
+- resource-pattern： 表示扫描注解类的后缀匹配模式，即“base-package+resource-pattern”将组成匹配模式用于匹配类路径中的组件，默认后缀为“**/*.class”，即指定包下的所有以.class结尾的类文件
+- name-generator：默认情况下的Bean标识符生成策略，默认是 AnnotationBeanNameGenerator，其将生成以小写开头的类名（不包括包名）；可以自定义自己的标识符生成策略
+- use-default-filters： 默认为true表示过滤@Component、@ManagedBean、@Named注解的类，如果改为false默认将不过滤这些默认的注解来定义Bean，即这些注解类不能被过滤到，即不能通过这些注解进行Bean定义
+- annotation-config： 表示是否自动支持注解实现Bean依赖注入，默认支持，如果设置为false，将关闭支持注解的依赖注入，需要通过<context:annotation-config/>开启
 
+默认情况下将自动过滤@Component、@ManagedBean、@Named注解的类并将其注册为Spring管理Bean，可以通过在<context:component-scan>标签中指定自定义过滤器将过滤到匹配条件的类注册为Spring管理Bean，具体定义方式如下：
+
+~~~xml
+<context:include-filter type="aspectj" expression=""/>
+<context:exclude-filter type="regex" expression=""/>
+~~~
+
+- <context:include-filter>： 表示过滤到的类将被注册为Spring管理Bean；
+- <context:exclude-filter>： 表示过滤到的类将不被注册为Spring管理Bean，它比<context:include-filter>具有更高优先级
+- type： 表示过滤器类型，目前支持注解类型、类类型、正则表达式、aspectj表达式过滤器，当然也可以自定义自己的过滤器，实现org.springframework.core.type.filter.TypeFilter即可
+- expression： 表示过滤器表达式
 
 ## context:component-scan源码分析
 
@@ -382,6 +398,7 @@ public BeanDefinition parse(Element element, ParserContext parserContext) {
     > 我们看到核心代码为两个for循环,外层是定义的以";"分隔符的多包配置来获取多个包地址名称,内层循环是将完成package下的类注册工作,比如生成注解类的名称,设置注解类的scope范围,检查注解类是否已经注册,为注解类生成代理类,最后将该bean注册到spring容器中。
 
  6. 完成注册工作,整个过程是调用registerBeanDefinition(definitionHolder, this.registry)来完成,源码如下:
+
     ~~~java
     public static void registerBeanDefinition(
     			BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry registry)
@@ -421,11 +438,56 @@ base-package的作用:The comma/semicolon/space/tab/linefeed-separated list of p
 
 如以逗号为分隔符,base-package="com.vcg.community.dao;com.vcg.community.service;com.vcg.community.action"
 
+当我们在系统中需要同时扫描多个包下注解类的时候,我们用三种方式:比如我们有com.dao,com.service,com.component,com.thirdparty,com.model等包的时候,我们要想都被扫描的话
+
+1. 配置最基本的包
+~~~xml
+<context:component-scan base-package="com"/>
+~~~
+
+- 优点: 简单,一次性把素有地方都进行扫描
+- 缺点: 粒度太大,太臃肿,目的不清楚,大多数企业都是这么配置的
+
+2. 配置多个context:component-scan,如
+~~~xml
+<context:component-scan base-package="com.dao"/>
+<context:component-scan base-package="com.service"/>
+<context:component-scan base-package="com.component"/>
+<context:component-scan base-package="com.thirdparty"/>
+<context:component-scan base-package="com.model"/>
+~~~
+
+- 优点: 清晰,很清楚的知道自己需要扫描的包
+- 缺点: 太臃肿,需要写的配置太多
+
+3. base-package配置以分隔符分割的列表
+~~~xml
+ <context:component-scan base-package="com.dao,com.service,com.component,com.thirdparty,com.model"/>
+~~~
+
+这样的配置比较好的,也是推荐这种写法
+
+
 ### use-default-filters
 
 use-default-filters的作用:Indicates whether automatic detection of classes annotated with @Component, @Repository, @Service,or @Controller should be enabled. Default is "true".
 
 >默认为true表示过滤@Component、@ManagedBean、@Named注解的类,如果改为false默认将不过滤这些默认的注解来定义Bean,即这些注解类不能被过滤到,即不能通过这些注解进行Bean定义;
+
+一般情况下,我们不会用到这个属性,但是spring还是提供了这种途径,来让我们更细粒度的控制扫描的包,比如我们现在要扫描com.dao包,但是我只想扫描该包下包含@Repository
+注解的类,但是不想扫描包含@Service注解的类,但是com.dao下确同时包含@Repository和@Service类,那此时需要怎么呢? 如下配置:
+
+~~~java
+<context:component-scan base-package="com.vcg.community.commonbean" use-default-filters="false">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+</context:component-scan>
+~~~
+
+我们将use-default-filters设置成false,则我们不采用默认的过滤方式,此时包含spring指定的注解类不能被过滤,然后我们加上了include-filter节点,其中type表面我们过滤的类型是注解方式,
+expression表面我们想要过滤注解为org.springframework.stereotype.Repository的类。
+
+> **Use-dafault-filters=”false”的情况下：<context:exclude-filter>指定的不扫描，<context:include-filter>指定的扫描**
+
 
 ### resource-pattern
 
@@ -441,14 +503,46 @@ annotation-config的作用:Indicates whether automatic detection of classes anno
 
 > 表示是否自动支持注解实现Bean依赖注入,默认支持，如果设置为false,将关闭支持注解的依赖注入,需要通过<context:annotation-config/>开启
 
+如果我们将该属性设置成false,则在扫描的base-package中的类中含有另一个注解类中的时候,比如含有@Autowired,@Resource等注解的时候,则无法完成对其
+依赖的bean的注入,如果我们非要将annotation-config属性设置成false的话,我们也可以设置<context:annotation-config>来满足需求,如下:
+~~~xml
+<context:component-scan base-package="com.vcg.community.commonbean" annotation-config="false"/>
+<context:annotation-config></context:annotation-config>
+~~~
+
+其实我们配置了<context:annotation-config>或者<context:component-scan annotation-config="true">,AutowiredAnnotationBeanPostProcessor、CommonAnnotationBeanPostProcessor、
+PersistenceAnnotationBeanPostProcessor 以及 RequiredAnnotationBeanPostProcessor 这 4 个BeanPostProcessor。
+注册这4个 BeanPostProcessor的作用，就是为了你的系统能够识别相应的注解
+
 ### name-generator
 
 name-generator的作用:The fully-qualified class name of the BeanNameGenerator to be used for naming detected components.
 
 > 默认情况下的Bean标识符生成策略,默认是 AnnotationBeanNameGenerator,其将生成以小写开头的类名(不包括包名);可以自定义自己的标识符生成策略
 
+如果我们想使用自定义的beanName生成策略,比如在beanName加上公司前缀,则我们可以自定义,需要我们实现BeanNameGenerator接口
+~~~java
+public class CustomeNameGenerator implements BeanNameGenerator {
+    private final String BEAN_NAME_PRE = "visualchina-";
+    @Override
+    public String generateBeanName(BeanDefinition definition, BeanDefinitionRegistry registry) {
+        String defaultBeanClassName =  definition.getBeanClassName();
+        String beanName = BEAN_NAME_PRE.concat(defaultBeanClassName.split("\\.")[defaultBeanClassName.split("\\.").length -1]);
+        registry.registerBeanDefinition(beanName,definition);
+        return beanName;
+    }
+}
+~~
+然后通过客户端调用:
+~~~java
+ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:application.xml");
+        CommonBean commonBean = (CommonBean) context.getBean("visualchina-CommonBean");
+        commonBean.say();
+~~~
 
-##   context:component-scan对字元素的处理
+但是,不推荐我们修改默认的beanName生成策略。
+
+##   context:component-scan对字子节点的处理
 
  context:component-scan共有两个子节点元素
  - include-filter               <xsd:element name="include-filter" type="filterType"minOccurs="0" maxOccurs="unbounded">
@@ -458,6 +552,14 @@ name-generator的作用:The fully-qualified class name of the BeanNameGenerator 
 
 include-filter的作用:表示过滤到的类将被注册为Spring管理Bean
 
+该方法可以实现一个非常特殊的需求,如 我想将那些标注为自定义注解的类也注入到spring容器中,则需要如下配置
+~~~xml
+<context:component-scan base-package="com.vcg.community.commonbean" use-default-filters="false">
+    <context:include-filter type="annotation" expression="com.vcg.community.util.CustomeAnnotation"/>
+</context:component-scan
+~~~~
+
+其中CustomeAnnotation为自定义的注解.
 
 ### exclude-filter
 
@@ -465,4 +567,5 @@ exclude-filter的作用:表示过滤到的类将不被注册为Spring管理Bean�
 
 ## 参考文章:
 
-- spring 注解模式详解 http://www.tuicool.com/articles/Z7R7jy
+- spring 注解模式详解 [http://www.tuicool.com/articles/Z7R7jy](http://www.tuicool.com/articles/Z7R7jy)
+-  <context:component-scan>使用说明  [http://blog.csdn.net/chunqiuwei/article/details/16115135](http://blog.csdn.net/chunqiuwei/article/details/16115135)
