@@ -7136,9 +7136,13 @@ td.visible-print {
 .cbp_tmlabel a:hover{
   text-decoration: none;
 }
+.cy{
+  margin-top: 20px;
+}
 .cyReward{
   text-align:center;
 }
 .comment{
   padding: 0 30px 10px;
+  text-align:center;
 }
