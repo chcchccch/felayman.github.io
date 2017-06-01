@@ -349,6 +349,29 @@ return obj;
      }
      ~~~
 
+    ~~~java
+        else {
+        if(pushName.equals("comment")){
+            pushSet.setComment(pushValue);
+        }else if(pushName.equals("praise")){
+            pushSet.setPraise(pushValue);
+        }else if(pushName.equals("follow")){
+            pushSet.setFollow(pushValue);
+        }else if(pushName.equals("resourceMessage")){
+            pushSet.setResourceMessage(pushValue);
+        }else if(pushName.equals("tribeMessage")){
+            pushSet.setTribeMessage(pushValue);
+        }else if(pushName.equals("contractMessage")){
+            pushSet.setContractMessage(pushValue);
+        }else if(pushName.equals("activityMessage")){
+            pushSet.setActivityMessage(pushValue);
+        }else if(pushName.equals("mail")){
+            pushSet.setMail(pushValue);
+        }
+        mysqlService.update(pushSet);
+        }
+    ~~~
+
     说明：公司中大量使用了类似的语法
 
     正例： 逻辑上超过 3 层的 if-else 代码可以使用卫语句，或者状态模式来实现。
@@ -492,3 +515,127 @@ put(elephant, fridge);
 在注释中用 FIXME 标记某代码是错误的，而且不能工作，需要及时纠正的情况。
 
     **总结:公司基本没有什么注释**
+
+# 核心开发总结
+
+1. 变量命名一定要规范
+
+    变量命名一定要清晰和明确,千万不要嫌长
+
+    我们公司中大量存在不规范的变量命名 ,比如:
+     ~~~java
+     JSONObject jsonObject = new JSONObject();
+    String sta = PF500MClientVersion.substring(8 , PF500MClientVersion.length()-1);
+    Map<Object , Object> map = redisService.opsHashEntries(SysRedisKeys.categoryHashKey);
+    Integer id = -1 ;id = Integer.valueOf(catId);
+    JSONObject msg = new JSONObject();
+    JSONArray list = getIds(setIds , Arrays.asList(1,9,10));
+    int j = contestHub.setContestById(contestId);
+    .....
+    ~~~
+    太多类似的命名,极度不规范,让人完全不命名该变量的意义
+
+2. 一定要检查NPE
+
+    - 对于从其他方法或内部接口或从RPC或从HHTP或者第三方API返回的接口结果,我们一定要检查返回的结果会不会出现NullPointException
+    - 对于方法连续调用的时候,一定要考虑是否在调用的过程中出现NullPointException
+
+    我们公司中大量存在不检查NPE情况,比如:
+
+    并没有判断contestHub.getContestBean()的返回值是否为null
+    ~~~java
+    ContestHub contestHub = new ContestHub();
+    Integer state = contestHub.getContestBean().getInteger("state");
+    ~~~
+
+    并没有判断user是否为null
+    ~~~java
+    User user = resourceHub.getObject(User.class, draftPictureFinish.getString("userId"));
+    resource.setId(draftPictureFinish.getString("id"));
+    resource.setResourceId(draftPictureFinish.getString("id"));
+    resource.setCategoryId(jsonObject.getString("categoryId"));
+    resource.setTitle(draftPictureFinish.getString("title"));
+    resource.setTags(draftPictureFinish.getString("keywords"));
+    resource.setCreatedDate(jsonObject.getDate("date"));
+    resource.setCreatedTime(jsonObject.getDate("date"));
+    resource.setDescription(draftPictureFinish.getString("description"));
+    resource.setUploadedDate(draftPictureFinish.getDate("createdTime"));
+    resource.setHeight(draftPictureFinish.getIntValue("height"));
+    resource.setWidth(draftPictureFinish.getIntValue("width"));
+    resource.setLatitude(-1d);
+    resource.setLongitude(-1d);
+    resource.setUploaderId(user.getId());
+    resource.setUploaderName(user.getNickName());
+    ~~~
+
+    并没有判断user是否为null
+    ~~~java
+    String PF500MClient = request.getHeader("PF500MClient");
+    String userId = SSOUtils.getUserId(request);
+    User user = resourceHub.getObject(User.class, userId);
+    String userName = user.getNickName();
+    String graphicId = UUIDUtil.generateUUID();
+    ~~~
+
+    并没有判断groupPic是否null
+    ~~~java
+     Resource groupPic = JSON.toJavaObject(draftBoxJson, Resource.class);
+    groupPic.setId(groupPhotoId);
+    groupPic.setUploaderId(userId);
+    groupPic.setUploaderName(userName);
+    groupPic.setResourceType(PicTypeConstant.groupPhoto);
+    groupPic.setCreatedTime(new Date());
+    groupPic.setCreatedDate(new Date());
+    groupPic.setUploadedDate(new Date());
+    ~~~
+
+    并没有判断resource是否为null,这段代码很搞笑,其实开发已经知道需要判断,但是判断的晚了
+    ~~~java
+    Resource resource = userHub.getObject(Resource.class, photoId);
+    String originOpenState = resource.getOpenState();
+    if (resource == null) {
+        throw new Exception("can not find photo and photoId : " + photoId);
+    }
+    if (!SSOUtils.getUserId(request).equals(resource.getUploaderId())) {
+        throw new Exception("this photo is not yours and photoId" + photoId);
+    }
+    ~~~
+
+3. 代码复用
+
+    能复用的代码一定要尽量复用
+
+    我们公司中大量存在代码冗余的代码块
+
+    ~~~java
+     private static String App_Key = SpringUtils.getBean(LoginConfig.class).getWb_app_key();
+    private static String App_Secret = SpringUtils.getBean(LoginConfig.class).getWb_app_secret();
+    private static String authorize_url = SpringUtils.getBean(LoginConfig.class).getWb_authorize_url();
+    private static String access_token_url = SpringUtils.getBean(LoginConfig.class).getWb_access_token_url();
+    private static String get_user_info = SpringUtils.getBean(LoginConfig.class).getWb_get_user_info();
+    private static String WX_App_Key = SpringUtils.getBean(LoginConfig.class).getWx_app_key();
+    private static String WX_App_Secret = SpringUtils.getBean(LoginConfig.class).getWx_app_secret();
+    private static String WX_authorize_url = SpringUtils.getBean(LoginConfig.class).getWx_authorize_url();
+    private static String WX_access_token_url = SpringUtils.getBean(LoginConfig.class).getWx_access_token_url();
+    private static String WX_get_user_info = SpringUtils.getBean(LoginConfig.class).getWx_get_user_info();
+    private static String GZH_App_Key = SpringUtils.getBean(LoginConfig.class).getGzh_app_key();
+    private static String GZH_App_Secret = SpringUtils.getBean(LoginConfig.class).getGzh_app_secret();
+    private static String GZH_authorize_url = SpringUtils.getBean(LoginConfig.class).getGzh_authorize_url();
+    ~~~
+
+    ~~~java
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("status", "500");
+    jsonObject.put("message", "erro");
+
+     jsonObject.put("status","501");
+    jsonObject.put("message", "不能关注自己");
+
+     jsonObject.put("status","503");
+    jsonObject.put("message", "用户已被举报");
+
+    jsonObject.put("status","504");
+    jsonObject.put("message", "用户已被删除");
+    ~~~
+
+    未完待续......
