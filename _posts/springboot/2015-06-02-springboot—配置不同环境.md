@@ -2,7 +2,7 @@
 layout: post
 title:  "springboot—配置不同环境"
 date:   2017-05-15 11:03:01 +0800
-categories: spring
+categories: spring springboot
 tag: spring springboot
 sid: 1496337989
 ---
