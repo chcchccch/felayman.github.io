@@ -2,7 +2,7 @@
 layout: post
 title:  "springboot—配置不同环境"
 date:   2017-06-02 11:03:01 +0800
-categories: spring springboot
+categories: springboot
 tag: spring springboot
 sid: 1496337989
 ---
@@ -69,41 +69,43 @@ sid: 1496337989
     - application-dev.properties
     - application-prod.properties
 
-**application.properties**
-~~~java
-spring.profiles.active=dev或test或prod
-~~~
+    **application.properties**
+    ~~~java
+    spring.profiles.active=dev或test或prod
+    ~~~
 
-**application-test.properties**
-~~~java
-server.port=8091
-~~~
+    **application-test.properties**
+    ~~~java
+    server.port=8091
+    ~~~
 
-**application-dev.properties**
-~~~java
-server.port=8092
-~~~
+    **application-dev.properties**
+    ~~~java
+    server.port=8092
+    ~~~
 
-**application-prod.properties**
-~~~java
-server.port=8093
-~~~
+    **application-prod.properties**
+
+    ~~~java
+    server.port=8093
+    ~~~
 
 3. 新建SpringBootSampleApplication.java
-~~~java
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-@EnableAutoConfiguration
-public class SpringBootSampleApplication {
+    ~~~java
+    import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+    import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBootSampleApplication.class, args);
-	}
+    @SpringBootApplication
+    @EnableAutoConfiguration
+    public class SpringBootSampleApplication {
 
-}
-~~~
+        public static void main(String[] args) {
+            SpringApplication.run(SpringBootSampleApplication.class, args);
+        }
+
+    }
+    ~~~
 
 4. 运行,分别在设置application.properties中的内容为spring.profiles.active=dev或test或prod,查看启动日志,可以顺利看到在不同的端口启动。
