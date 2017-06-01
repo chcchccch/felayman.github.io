@@ -1,0 +1,30 @@
+---
+layout: home
+title: felayman个人博客
+---
+
+<div class="container">
+    <header class="clearfix">
+    </header>
+    <div class="main">
+        <ul class="cbp_tmtimeline">
+            {% for post in site.posts %}
+            {% if post.categories[0] == '原创' %}
+            <li>
+                <time class="cbp_tmtime" datetime="{{'%Y-%m-%d %H:%M'}}">
+                    <span>{{post.date | date: '%Y-%m-%d' }}</span>
+                    <span>{{post.date | date: '%H:%M' }}</span>
+                </time>
+                <div class="cbp_tmicon cbp_tmicon-phone"></div>
+                <div class="cbp_tmlabel">
+                    <h4><a href="{{post.url}}">{{post.title}}</a></h4>
+                    <p>
+                        {{post.excerpt}}
+                    </p>
+                </div>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>

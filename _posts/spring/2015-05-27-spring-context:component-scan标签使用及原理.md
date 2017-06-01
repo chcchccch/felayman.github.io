@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "context:component-scan标签 源码分"
+title:  "context:component-scan标签源码分析"
 date:   2017-05-25 11:03:01 +0800
 categories: spring
 tag: spring 原创
@@ -532,8 +532,10 @@ public class CustomeNameGenerator implements BeanNameGenerator {
         return beanName;
     }
 }
-~~
+~~~
+
 然后通过客户端调用:
+
 ~~~java
 ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:application.xml");
         CommonBean commonBean = (CommonBean) context.getBean("visualchina-CommonBean");
@@ -565,7 +567,16 @@ include-filter的作用:表示过滤到的类将被注册为Spring管理Bean
 
 exclude-filter的作用:表示过滤到的类将不被注册为Spring管理Bean，它比<context:include-filter>具有更高优先级
 
+其中两个元素节点都有两个属性节点
+1. type
+    - annotation 表明过滤类型为注解
+    - assignable 表明过滤类型为某个类或接口的子类或实现
+    - aspectj
+    - regex
+    - custom
+2. expression
+
 ## 参考文章:
 
 - spring 注解模式详解 [http://www.tuicool.com/articles/Z7R7jy](http://www.tuicool.com/articles/Z7R7jy)
--  <context:component-scan>使用说明  [http://blog.csdn.net/chunqiuwei/article/details/16115135](http://blog.csdn.net/chunqiuwei/article/details/16115135)
+-  <context:component-scan>使用说明   [http://blog.csdn.net/chunqiuwei/article/details/16115135](http://blog.csdn.net/chunqiuwei/article/details/16115135)
