@@ -218,6 +218,7 @@ cache.put(key, value);
     **公司反例**
     ~~~java
     long time = System.currentTimeMillis() - 86400000l;
+     follow.setUpdatedTime(4102444800001l);
     ~~~
     说明：86400000l容易被看错864000001,这是大忌
 
