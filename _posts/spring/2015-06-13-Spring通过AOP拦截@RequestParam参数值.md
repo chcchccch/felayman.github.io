@@ -52,7 +52,10 @@ Tribe tribe = tribeService.getTribe(tribeId);
                     RequestParam annotation = parameterType.getAnnotation(RequestParam.class);
                     String value = annotation.value();
                     if ("tribeId".equals(value)){
-                        //TODO 对tribeId进行判断操作
+                        /**
+                            1.判断部落是否存在
+                            2.判断当前用户是否是部落首领或管理员
+                        **/
                     }
                 }
             }
