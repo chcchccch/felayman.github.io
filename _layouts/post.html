@@ -35,10 +35,20 @@
                 </div>
             </div>
     </div></div>
-        <div id="cyReward" role="cylabs" data-use="reward" sid="{{page.sid}}" class="cyReward"></div>
-        <div id="cyQing" role="cylabs" data-use="qing" sid="{{page.sid}}" class="cyReward" style="margin-left: 37%;padding-top:30px;"></div>
-        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
-    <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyrTc3dGy"></script>
-   {% include home/footer.html %}
+
+
+<div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+    var cloudTieConfig = {
+        url: document.location.href,
+        sourceId: "",
+        productKey: "8cbc9f43ff834901beb8d674c0a15e32",
+        target: "cloud-tie-wrapper"
+    };
+</script>
+<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+{% include home/footer.html %}
 </body>
 </html>
