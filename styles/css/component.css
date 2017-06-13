@@ -49,17 +49,17 @@
 
 .cbp_tmtimeline > li .cbp_tmtime span:last-child {
 	font-size: 2.9em;
-	color: #6cbfee;
+	color: #1d365d;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmtime span:last-child {
-	color: #6cbfee;
+	color: #1d365d;
 }
 
 /* Right content */
 .cbp_tmtimeline > li .cbp_tmlabel {
 	margin: 0 0 15px 25%;
-	background: #6cbfee;
+	background: #1d365d;
 	color: #fff;
 	padding: 1em;
 	font-size: 14px;
@@ -70,7 +70,7 @@
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel {
-	background: #6cbfee;
+	background: #1d365d;
 }
 
 .cbp_tmtimeline > li .cbp_tmlabel h2 { 
@@ -87,13 +87,13 @@
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-right-color: #6cbfee;
+	border-right-color: #1d365d;
 	border-width: 10px;
 	top: 10px;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
-	border-right-color: #6cbfee;
+	border-right-color: #1d365d;
 }
 
 /* The icons */
@@ -179,7 +179,7 @@
 
 	.cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
 		border-right-color: transparent;
-		border-bottom-color: #6cbfee;
+		border-bottom-color: #1d365d;
 	}
 
 	.cbp_tmtimeline > li .cbp_tmicon {
