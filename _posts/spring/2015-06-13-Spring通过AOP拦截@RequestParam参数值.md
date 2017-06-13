@@ -72,3 +72,14 @@ Tribe tribe = tribeService.getTribe(tribeId);
 public @interface TribeAdminValidator {
 }
 ~~~
+
+这样处理的前提是,使用@requestparam的必须使用下面这种格式:
+~~~java
+@RequestParam (value="tribeId") String tribeId
+~~~
+而不能像下面这种写法:
+~~~java
+@RequestParam  String tribeId
+~~~
+
+后者是无法通过反射获取到RequestParam注解的value值.
