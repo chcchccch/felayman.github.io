@@ -49,17 +49,17 @@
 
 .cbp_tmtimeline > li .cbp_tmtime span:last-child {
 	font-size: 2.9em;
-	color: #1d365d;
+	color: #6cbfee;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmtime span:last-child {
-	color: #1d365d;
+	color: #6cbfee;
 }
 
 /* Right content */
 .cbp_tmtimeline > li .cbp_tmlabel {
 	margin: 0 0 15px 25%;
-	background: #1d365d;
+	background: #6cbfee;
 	color: #fff;
 	padding: 1em;
 	font-size: 14px;
@@ -70,10 +70,10 @@
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel {
-	background: #1d365d;
+	background: #6cbfee;
 }
 
-.cbp_tmtimeline > li .cbp_tmlabel h2 { 
+.cbp_tmtimeline > li .cbp_tmlabel h2 {
 	margin-top: 0px;
 	padding: 0 0 0 -10px;
 }
@@ -87,13 +87,13 @@
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-right-color: #1d365d;
+	border-right-color: #6cbfee;
 	border-width: 10px;
 	top: 10px;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
-	border-right-color: #1d365d;
+	border-right-color: #6cbfee;
 }
 
 /* The icons */
@@ -179,7 +179,7 @@
 
 	.cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
 		border-right-color: transparent;
-		border-bottom-color: #1d365d;
+		border-bottom-color: #6cbfee;
 	}
 
 	.cbp_tmtimeline > li .cbp_tmicon {
