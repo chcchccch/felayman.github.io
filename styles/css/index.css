@@ -6507,7 +6507,7 @@ hr {
 }
 .docs-nav {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
-  background-color: #3594cb;
+  background-color: #1d365d;
   border-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
 }
@@ -7123,7 +7123,7 @@ td.visible-print {
 }
 
 .pagination a {
-  color: #3594cb;
+  color: #1d365d;
   padding: 0 0 10px;
 }
 
