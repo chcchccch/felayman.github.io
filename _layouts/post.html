@@ -20,7 +20,7 @@
                             <hr>
                             <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
                              <div class="meta">
-                                <p>{{page.date | date: '%Y-%m-%d}} | 分类<a href="/categories/{{page.categories}}">{{page.categories}}</a> | 标签 {% assign tags = page.tag | split: " " %}
+                                <p>{{page.date | date: '%Y-%m-%d' }} | 分类<a href="/categories/{{page.categories}}">{{page.categories}}</a> | 标签 {% assign tags = page.tag | split: " " %}
                                     {% for tag in tags %}
                                     <a href="/tag/{{ tag }}">{{ tag }}</a>
                                     {% endfor %} | 作者: {{site.author}}
