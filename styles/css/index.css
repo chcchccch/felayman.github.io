@@ -7145,3 +7145,11 @@ td.visible-print {
   text-align:center;
   margin: 0 auto;
 }
+.share-div p{
+  float: left;
+  line-height: 2;
+  margin-right: 5px;
+}
+.share-p{
+  line-height: 1px;
+}
