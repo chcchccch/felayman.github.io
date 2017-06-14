@@ -2,6 +2,13 @@
 <html>
 {% include post/head.html %}
 {% include home/header.html %}
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="请输入文章标题搜索相关文章" >
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
 <body class="index">
 <div class="container">
         <div class="row">
@@ -46,7 +53,6 @@
             </div>
     </div>
 </div>
-
 </div>
 {% include home/footer.html %}
 </body>
