@@ -12,7 +12,9 @@ sid: 1498200579
 ## 前言
 
 经常在业务中需要将字符串和列表进行互相转换,下面为我封装的工具类:
+
 **列表转换成字符**
+
 ~~~java
 public static String list2Str(List <String>list,String patten){
 		assert list != null;
@@ -26,7 +28,9 @@ public static String list2Str(List <String>list,String patten){
 		return stringBuilder.toString();
 	}
 ~~~
+
 **成字符转换成列表**
+
 ~~~java
 public static List<String> str2List(String params,String patten,boolean isDeDuplication){
 		assert params != null;
@@ -57,6 +61,7 @@ String string = String.join(";",list);
 而StringJoiner的内部也是通过StringBuilder来完成字符串的拼接,只是StringJoiner中少了对分隔符的拼接工作,本质上并没有什么区别
 
 StringJoiner的add操作:
+
 ~~~java
  public StringJoiner add(CharSequence newElement) {
         prepareBuilder().append(newElement);
