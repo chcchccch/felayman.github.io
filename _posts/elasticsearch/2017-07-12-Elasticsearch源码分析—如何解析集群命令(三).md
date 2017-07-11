@@ -158,14 +158,16 @@ sid: 1499788428
 
 ### 我们以RestCatAction为例,主要处理localhost:9200/_cat命令,我们看看处理方式
 
- 1. 预加载RestCatAction
+ 1.预加载RestCatAction
+
  ~~~java
  registerHandler.accept(new RestCatAction(settings, restController, catActions));
  ~~~
 
  因为Elasticsearch5.x版本后使用java8来进行开发,出现了大量Lambda表达式,请参考相关java8特性,这里使用用到了Consumer接口来判断输入的对象是否符合某个条件
 
- 2. 创建RestCatAction实例
+ 2.创建RestCatAction实例
+
  ~~~java
   private static final String CAT = "=^.^=";
   private static final String CAT_NL = CAT + "\n";
@@ -184,7 +186,7 @@ sid: 1499788428
       }
  ~~~
 
- 3. 将拼接成的rest路径放入到RestController中,即构建出出M-V-C模式,
+ 3.将拼接成的rest路径放入到RestController中,即构建出出M-V-C模式,
 
     ~~~java
     String[] strings = path.split(SEPARATOR);
@@ -205,7 +207,7 @@ sid: 1499788428
 
  这样一来,我们就能以REST风格来访问相对应的rest命令,这里root.insert(strings, index, value)相当于模拟出/_cat路径格式
 
- 4. 缓存输出结果,RestCatAction将结果缓存在private final String HELP中,然后在访问的时候,将该结果返回给视图
+ 4.缓存输出结果,RestCatAction将结果缓存在private final String HELP中,然后在访问的时候,将该结果返回给视图
 
  ~~~java
   @Override
