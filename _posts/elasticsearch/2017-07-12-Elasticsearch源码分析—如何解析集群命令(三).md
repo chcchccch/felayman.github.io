@@ -253,4 +253,46 @@ sid: 1499788428
 ### 动态结果
 
     比如http://localhost:9200/_cat/health 命令的返回结果在不同的时间返回结果一般是不同的,这个时候Elasticsearch是如何处理的呢?
+    这个时候就会利用集群内部的API来获取当前集群的信息,而不是利用静态字段缓存,而是在每次调用的时候,通过集群内部API来返回结果.
 
+~~~java
+@Override
+    public RestChannelConsumer doCatRequest(final RestRequest request, final NodeClient client) {
+        ClusterHealthRequest clusterHealthRequest = new ClusterHealthRequest();
+
+        return channel -> client.admin().cluster().health(clusterHealthRequest, new RestResponseListener<ClusterHealthResponse>(channel) {
+            @Override
+            public RestResponse buildResponse(final ClusterHealthResponse health) throws Exception {
+                return RestTable.buildResponse(buildTable(health, request), channel);
+            }
+        });
+    }
+~~~
+
+然后构建一个类似表单的table来构建返回结果的视图：
+~~~java
+private Table buildTable(final ClusterHealthResponse health, final RestRequest request) {
+        Table t = getTableWithHeader(request);
+        t.startRow();
+        t.addCell(health.getClusterName());
+        t.addCell(health.getStatus().name().toLowerCase(Locale.ROOT));
+        t.addCell(health.getNumberOfNodes());
+        t.addCell(health.getNumberOfDataNodes());
+        t.addCell(health.getActiveShards());
+        t.addCell(health.getActivePrimaryShards());
+        t.addCell(health.getRelocatingShards());
+        t.addCell(health.getInitializingShards());
+        t.addCell(health.getUnassignedShards());
+        t.addCell(health.getNumberOfPendingTasks());
+        t.addCell(health.getTaskMaxWaitingTime().millis() == 0 ? "-" : health.getTaskMaxWaitingTime());
+        t.addCell(String.format(Locale.ROOT, "%1.1f%%", health.getActiveShardsPercent()));
+        t.endRow();
+        return t;
+    }
+~~~
+返回结果如下：
+~~~
+1499791133 00:38:53 elasticsearch yellow 1 1 6 6 0 0 6 0 - 50.0%
+~~~
+
+这样我们就差不多能知道每个返回参数的意思了。
