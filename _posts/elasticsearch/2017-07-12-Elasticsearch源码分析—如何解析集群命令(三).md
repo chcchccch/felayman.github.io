@@ -156,7 +156,7 @@ sid: 1499788428
          registerHandler.accept(new RestCatAction(settings, restController, catActions));
  ~~~
 
- ### 我们以RestCatAction为例,主要处理localhost:9200/_cat命令,我们看看处理方式
+### 我们以RestCatAction为例,主要处理localhost:9200/_cat命令,我们看看处理方式
 
  1. 预加载RestCatAction
  ~~~java
